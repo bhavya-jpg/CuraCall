@@ -1,185 +1,165 @@
+# Doctor Booking System with AI Voice Assistant  
+**Technology Stack:** MERN (MongoDB, Express, React, Node.js) + Twilio Voice & WhatsApp + OpenAI Realtime API + Google Calendar API
 
+## 📌 Project Overview
+This project is a **full-stack doctor booking platform** built using the **Prescripto MERN Tutorial** as a base, enhanced with:
+- Google Calendar integration for real-time doctor availability
+- AI-powered voice booking assistant via Twilio Voice + OpenAI Realtime
+- WhatsApp appointment confirmations
+- Optional outbound AI booking calls
+
+The development is done **phase-by-phase**:  
+Each phase is developed, tested, validated, and then merged into the stable branch with a version tag.
+
+---
+
+## 🛠 Tech Stack & Integrations
+- **Frontend:** React.js (from Prescripto tutorial)
+- **Backend:** Node.js + Express.js
+- **Database:** MongoDB Atlas / Local MongoDB
+- **Voice AI:** Twilio Voice (Media Streams) + OpenAI Realtime API
+- **Calendar:** Google Calendar API (OAuth for each doctor)
+- **Messaging:** Twilio WhatsApp API
+
+---
+
+## 📂 Git Branch Structure
+- `main` → Stable production-ready version
+- `dev` → Ongoing development branch
+- `phase-x-*` → Feature branches for each incremental phase
+
+**Example Phase Branches:**
+
 
-Here’s how we can adapt the project process document into an incremental “phase-by-phase” execution workflow so that you can build ➡️ test ➡️ validate ➡️ move on.
+**Workflow:**
+
 
-Incremental Development & Testing Plan
-Phase 0 — Setup & Planning
-Goal: Have environment, accounts, and architecture ready.
+---
+
+## 🚀 Incremental Development Plan
+
+### **Phase 0 — Setup & Planning**
+**Goal:** Set up environment, accounts, and app structure.
+
+**Tasks:**
+1. Initialize Git repo.
+2. Create `.env` template with:
+   - `MONGO_URI`
+   - `TWILIO_ACCOUNT_SID`
+   - `TWILIO_AUTH_TOKEN`
+   - `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET`
+   - `OPENAI_API_KEY`
+3. Create accounts: MongoDB Atlas, Twilio (Voice & WhatsApp enabled), Google Cloud Console (Calendar API enabled).
+4. Install tools: Node.js LTS, npm/yarn, ngrok.
+
+**Test Cases:**
+- Can commit/push code to GitHub without exposing secrets.
+- `.env` variables load correctly in backend.
+
+---
 
-Set up Git repo for version control.
+### **Phase 1 — Base Prescripto MERN App**
+**Goal:** Full web booking flow as per tutorial.
 
-Create environment variable file (.env) templates for:
+**Tasks:**
+- Follow Prescripto MERN YouTube tutorial.
+- Implement patient, doctor, admin dashboards.
+- Enable web booking & payment.
 
-MongoDB credentials
+**Test Cases:**
+- Patient signup/login works.
+- Doctor signup/login works.
+- Admin dashboard accessible.
+- Booking appears in MongoDB and in both doctor & patient dashboards.
+- Payment flow works in test mode.
 
-Twilio account SID/auth token
+---
 
-Google Calendar OAuth credentials
+### **Phase 2 — Google Calendar Integration**
+**Goal:** Bookings sync with doctors’ Google Calendars.
 
-OpenAI API key
+**Tasks:**
+- Add "Connect Google Calendar" in doctor dashboard.
+- Implement Google OAuth & store refresh tokens.
+- API endpoints for:
+  - `check-availability`
+  - `book` → Create calendar event + Mongo entry.
+- Modify web booking to also create Google Calendar event.
 
-Create accounts:
+**Test Cases:**
+- Doctor can connect calendar & select it.
+- Web booking → Calendar event created.
+- Double booking prevented if slot is taken.
 
-MongoDB Atlas (unless you want local Mongo)
+---
 
-Twilio (Voice & WhatsApp enabled)
+### **Phase 3 — Voice Assistant (Inbound Calls)**
+**Goal:** Book via AI-powered voice calls.
 
-Google Cloud Console project for Calendar API
+**Tasks:**
+- Set up Twilio number & webhook.
+- Implement Twilio -> OpenAI Realtime bridge.
+- Define tool calls:
+  1. `find_doctors_by_specialty_and_area`
+  2. `check_doctor_availability`
+  3. `book_appointment`
+  4. `send_whatsapp_confirmation`
+- Train assistant with booking flow prompt.
 
-Install dev tools: Node.js (latest LTS), npm/yarn, ngrok.
+**Test Cases:**
+- Call Twilio number → AI greets & asks specialty.
+- AI lists doctors from DB.
+- AI checks Google Calendar before booking.
+- Successful booking appears in MongoDB & Calendar.
 
-Test Cases for Phase 0:
+---
 
-Can commit/push code to GitHub without secrets leaking.
+### **Phase 4 — WhatsApp Confirmation**
+**Goal:** Send appointment details via WhatsApp for web & voice bookings.
 
-.env values load properly in backend.
+**Tasks:**
+- Enable Twilio WhatsApp sandbox/live.
+- Trigger WhatsApp message after successful booking with:
+  - Doctor name, specialty
+  - Date/time
+  - Location (with Google Maps link)
 
-Phase 1 — Base Prescripto MERN App
-Goal: App works just like in the tutorial with standard booking flows.
+**Test Cases:**
+- Booking from web → WhatsApp message sent.
+- Booking from voice → WhatsApp message sent.
 
-Tasks:
+---
 
-Follow the YouTube Prescripto tutorial completely.
+### **Phase 5 — Outbound Calls (Optional)**
+**Goal:** Initiate AI booking via call from website.
 
-Test:
+**Tasks:**
+- Add “Confirm via Voice Call” button.
+- Trigger Twilio outbound call API.
+- AI completes same booking flow.
 
-Patient signup/login
+**Test Cases:**
+- Website button triggers outbound AI call.
+- AI handles conflicts & re-scheduling.
 
-Doctor signup/login
+---
 
-Admin dashboard access
+### **Phase 6 — Admin Tools & Logs**
+**Goal:** Provide visibility for voice bookings & error tracking.
 
-Web-based booking & payment flow
+**Tasks:**
+- Add `channel` field to bookings ("web" or "voice").
+- Admin dashboard shows voice bookings separately.
+- Store call transcripts & logs.
 
-Test Cases for Phase 1:
+**Test Cases:**
+- Voice bookings display with tag.
+- AI/Twilio errors logged for debugging.
 
-Booking created in Mongo (check DB directly).
+---
 
-Doctor dashboard shows bookings.
+## 💡 Workflow Advice
+- **Test after every phase** before merging to `main`.
+- Use **tags** for stable releases:
 
-Admin can see all bookings.
 
-Payment flow works in test mode.
-
-Phase 2 — Google Calendar Integration
-Goal: Doctors can link their Google Calendar and bookings are tracked on it.
-
-Tasks:
-
-Add “Connect Google Calendar” button in Doctor Dashboard.
-
-Implement OAuth flow and store refresh tokens.
-
-Implement backend API:
-
-check-availability
-
-book (calendar + Mongo)
-
-Modify web booking API to also create a Google Calendar event.
-
-Test Cases for Phase 2:
-
-Doctor can connect Google account and select a calendar.
-
-Web booking creates Google Calendar event.
-
-API blocks double booking if slot is occupied.
-
-Once this works, you know your availability check logic is sound before adding the voice assistant.
-
-Phase 3 — Voice Assistant (Inbound Calls)
-Goal: Caller can talk to AI assistant and book an appointment.
-
-Tasks:
-
-Set up Twilio number with webhook.
-
-Implement Twilio Media Streams → OpenAI Realtime bridge.
-
-Define tool calls:
-
-find_doctors_by_specialty_and_area
-
-check_doctor_availability
-
-book_appointment
-
-send_whatsapp_confirmation
-
-Train assistant’s prompt with booking conversation flow.
-
-Test Cases for Phase 3:
-
-Call Twilio number → AI greets & asks specialty.
-
-AI reads doctor names from DB.
-
-AI checks Google Calendar before booking.
-
-Successful booking in Mongo + Calendar.
-
-Phase 4 — WhatsApp Confirmation
-Goal: After booking (web or voice), user gets appointment details on WhatsApp.
-
-Tasks:
-
-Enable Twilio WhatsApp sandbox or Live API.
-
-Implement WhatsApp message trigger after booking confirmation.
-
-Format message with:
-
-Doctor name/specialty
-
-Appointment date/time
-
-Location/Google Maps link
-
-Test Cases for Phase 4:
-
-Booking from web sends WhatsApp message.
-
-Booking from voice sends WhatsApp message.
-
-Phase 5 — Outbound Calls (Optional)
-Goal: Website triggers an AI-driven outbound booking confirmation call.
-
-Tasks:
-
-Button on doctor page: “Confirm via Voice Call”.
-
-Backend triggers Twilio outgoing call API to number.
-
-AI completes same booking flow.
-
-Test Cases for Phase 5:
-
-Starting from website triggers outgoing call.
-
-AI handles date/time conflicts as in inbound flow.
-
-Phase 6 — Admin Tools, Logs, Error Handling
-Goal: Track voice bookings, transcripts, errors.
-
-Tasks:
-
-Add booking channel field ("web" or "voice").
-
-Admin dashboard shows voice bookings separately.
-
-Store short call transcript for audits.
-
-Test Cases for Phase 6:
-
-Voice bookings visible with tag.
-
-Errors from AI/Twilio are logged.
-
-Workflow Advice
-After each phase, commit and push to GitHub. Tag release:
-Example: v1.0-phase1-complete
-
-Run post-phase testing with real API credentials.
-
-Keep mock/stub data for API calls when possible (especially Calendar API) for local testing.
