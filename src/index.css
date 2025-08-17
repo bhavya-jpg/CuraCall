@@ -13,7 +13,18 @@
   --color-primary-800: #1e40af;
   --color-primary-900: #1e3a8a;
   --color-primary-950: #172554;
+  
 }
+@utility grid-cols-auto {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+@utility grid-cols-doctors {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 
 .active hr{
   @apply block
