@@ -1,7 +1,11 @@
 @import "tailwindcss";
-
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Outfit:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Silkscreen:wght@400;700&display=swap");
+ *{
+  font-family: "Outfit", sans-serif;
+  
+}
 @theme {
-  --color-primary: #5f6FFF;
+  --color-primary: #5f6fff;
   --color-primary-50: #eff6ff;
   --color-primary-100: #dbeafe;
   --color-primary-200: #bfdbfe;
@@ -13,7 +17,6 @@
   --color-primary-800: #1e40af;
   --color-primary-900: #1e3a8a;
   --color-primary-950: #172554;
-  
 }
 @utility grid-cols-auto {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -25,11 +28,10 @@
   margin: 0 auto;
 }
 
-
-.active hr{
-  @apply block
+.active hr {
+  @apply block;
 }
 
-::-webkit-scrollbar{
-  @apply hidden
+::-webkit-scrollbar {
+  @apply hidden;
 }
