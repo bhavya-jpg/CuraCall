@@ -16,7 +16,7 @@ const {doctors}=useContext(AppContext)
       <div className="w-full max-w-6xl mx-auto grid grid-cols-doctors gap-4 pt-5 gap-y-6 px-3 sm:px-0">
         {/* This is where the list of top doctors will be rendered */}
         {doctors.slice(0, 10).map((item, index) => (
-          <div onClick={() => navigate(`/appointment/${item._id}`)}
+          <div onClick={() => navigate(`/appointments/${item._id}`)}
             className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
             key={index}
           >
@@ -26,7 +26,7 @@ const {doctors}=useContext(AppContext)
                 <p className="w-2 h-2 bg-green-500 rounded-full"></p>
                 <p>Available</p>
               </div>
-              <p className="text-grey-900 text-lg font-medium">{item.name}</p>
+              <p className="text-gray-900 text-lg font-medium">{item.name}</p>
               <p className="text-gray-600 text-sm">{item.speciality}</p>
             </div>
           </div>
