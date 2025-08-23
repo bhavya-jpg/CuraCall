@@ -13,6 +13,7 @@ const {doctors}=useContext(AppContext)
       <p className="sm:w-1/3 text-center text-sm">
         Simply browse through our extensive list of trusted doctors
       </p>
+      doc
       <div className="w-full max-w-6xl mx-auto grid grid-cols-doctors gap-4 pt-5 gap-y-6 px-3 sm:px-0">
         {/* This is where the list of top doctors will be rendered */}
         {doctors.slice(0, 10).map((item, index) => (
