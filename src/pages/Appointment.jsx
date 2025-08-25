@@ -138,12 +138,12 @@ const Appointment = () => {
       </div>
 
       {/*------Booking slots - now below doctor info------*/}
-      <div className="mt-6 font-medium text-gray-700 mx-2 sm:mx-0">
+      <div className="mt-4 font-medium text-gray-700 sm:pl-4 sm:ml-72">
         <p className="mb-4">Booking Slots</p>
 
         {/* Day selection */}
-        <div className="flex gap-3 items-center w-full overflow-x-scroll mb-4">
-          {docSlots.length > 0 &&
+        <div className="flex gap-3 items-center w-full overflow-x-scroll mt-4">
+          {docSlots.length   &&
             docSlots.map((item, index) => (
               <div
                 onClick={() => setSlotIndex(index)}
@@ -162,32 +162,32 @@ const Appointment = () => {
 
         {/* Time slots for selected day - FIXED THIS SECTION */}
         <div className="flex items-center gap-3 w-full overflow-x-scroll mt-4">
-          {docSlots.length > 0 && docSlots[slotIndex] &&
+          {docSlots.length &&
             docSlots[slotIndex].map((item, index) => (
-              <p 
-                onClick={() => setSlotTime(item.time)} 
+              <p
+                onClick={() => setSlotTime(item.time)}
                 className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${
-                  item.time === slotTime 
-                    ? 'bg-primary text-white' 
-                    : 'text-gray-400 border border-gray-300'
-                }`} 
+                  item.time === slotTime
+                    ? "bg-primary text-white"
+                    : "text-gray-400 border border-gray-300"
+                }`}
                 key={index}
               >
                 {item.time.toLowerCase()}
               </p>
             ))}
         </div>
-        
+
         {/* Only show button if a slot is selected */}
         {slotTime && (
-          <button className="bg-primary text-white text-sm font-light px-14 py-3 rounded-full my-6">
+          <button className="bg-primary text-white text-sm font-light px-14 py-3 rounded-full my-6 cursor-pointer">
             Book an appointment
           </button>
         )}
       </div>
 
       {/*-----Listing related docs----- */}
-      <RelatedDoctors docId={docId} speciality={docInfo.speciality}/>
+      <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
     </div>
   );
 };
