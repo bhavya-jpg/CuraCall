@@ -1,8 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Outfit:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Silkscreen:wght@400;700&display=swap");
 @import "tailwindcss";
- *{
+* {
   font-family: "Outfit", sans-serif;
-  
 }
 @theme {
   --color-primary: #5f6fff;
@@ -34,4 +33,10 @@
 
 ::-webkit-scrollbar {
   @apply hidden;
+}
+
+@media (max-width: 740px) {
+  .active p {
+    @apply text-white bg-primary;
+  }
 }

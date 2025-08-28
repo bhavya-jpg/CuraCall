@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="flex flex-col md:flex-row flex-wrap bg-primary rounded-lgpx-6 md:px-10 lg:px-20">
       {/*--------LEFT SIDE-------- */}
-      <div className="md:w-1/2 flex flex-col items-start justify-center gap-4 py-10 m-auto md:py-[10vw] md:mb-[-30px]">
+      <div className="md:w-1/2 flex flex-col items-center md:items-start justify-center gap-4 py-10 m-auto md:py-[10vw] md:mb-[-30px] text-center md:text-left">
         <p className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight md:leading-tight lg:leading-tight">
           Book Appointment <br /> With Trusted Doctors
         </p>
@@ -33,25 +33,8 @@ const Header = () => {
           alt=""
         />
       </div>
-      <div className='text-xl my-4'>
-        <p>
-          WHY <span className="text-gray-700 font-semibold">CHOOSE US</span>
-        </p>
-      </div>
-      <div>
-        <div>
-          <b></b>
-          <p></p>
-          </div>
-        <div>
-          <b></b>
-          <p></p>
-          </div>
-        <div>
-          <b></b>
-          <p></p>
-          </div>
-      </div>
+     
+      
     </div>
   );
 };
